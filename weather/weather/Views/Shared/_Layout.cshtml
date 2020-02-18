@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.City weather</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            @Html.ActionLink("Download all weather data", "Download", "Home")
+            <div>
+                <ul class="nav nav-tabs nav-tabs-custom">
+                    <li class="@(ViewBag.City == "Sveta Nedelja" ? "active" : "")">
+                        @Html.ActionLink("Sveta Nedelja", "Index", "Home", new { city = "Sveta Nedelja" }, null)        
+                    </li>
+                    <li class="@(ViewBag.City == "Split" ? "active" : "")">
+                        @Html.ActionLink("Split", "Index", "Home", new { city = "Split" }, null)
+                    </li>
+                    <li class="@(ViewBag.City == "Osijek" ? "active" : "")">
+                        @Html.ActionLink("Osijek", "Index", "Home", new { city = "Osijek" }, null)
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>@DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

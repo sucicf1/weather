@@ -1,0 +1,62 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var listItems = new List<ListItem> {
+        new ListItem { Text = "Celsius", Value = "Celsius" },
+        new ListItem { Text = "Fahrenheit", Value = "Fahrenheit" }
+    };
+}
+<script>
+    function changeTemperatureUnit(value) {
+        if (value == "Celsius") {
+            document.getElementById("tempCelsius").style.display = "block";
+            document.getElementById("tempFahrenheit").style.display = "none";
+        } else {
+            document.getElementById("tempCelsius").style.display = "none";
+            document.getElementById("tempFahrenheit").style.display = "block";
+        }
+    }
+</script>
+
+<div>
+    <table>
+        <tr>
+            <td>
+                @Html.DropDownList("TemperatureUnit", new SelectList(listItems,"Value","Text"), 
+                            new { @onchange="changeTemperatureUnit(this.value)" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @ViewBag.City , @ViewBag.Country
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Latitude: @ViewBag.Lat<br />
+                Longitude: @ViewBag.Lon
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="tempCelsius">
+                    Temperature (Feels Like) @ViewBag.TempFeelsLikeCelsius<br />
+                    Temperature @ViewBag.TempCelsius<br />
+                    Temperature (Min) @ViewBag.TempMinCelsius<br />
+                    Temperature (Max) @ViewBag.TempMaxCelsius<br />
+                </div>
+                <div id="tempFahrenheit" style="display:none;">
+                    Temperature (Feels Like) @ViewBag.TempFeelsLikeFahrenheit<br />
+                    Temperature @ViewBag.TempFahrenheit<br />
+                    Temperature (Min) @ViewBag.TempMinFahrenheit<br />
+                    Temperature (Max) @ViewBag.TempMaxFahrenheit<br />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pressure: @ViewBag.Pressure<br />
+                Humidity: @ViewBag.Humidity
+            </td>
+        </tr>
+    </table>
+</div>
